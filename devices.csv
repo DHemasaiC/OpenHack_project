@@ -1,6 +1,6 @@
 DeviceID,DeviceName,ModelName,EquipmentNumber,CurrentUser,PSNumber,Phone,Email,LastUpdated
 93 13 5D 14,Oscilloscope,Tektronix TBS1102B,EMSYS0001,Gangadhar T,40018743,9515846269,ganga@example.com,2025-07-24 09:00:00
-A2 B4 C3 D1,Function Generator,Siglent SDG1032X,EMSYS0002,Hema Sai Reddy G,40019162,7981435723,hema@example.com,2025-07-24 09:15:00
+A2 B4 C3 D1,Function Generator,Siglent SDG1032X,EMSYS0002,Hema Sai Reddy,40019162,7981435723,gayamhemasaireddy@gmail.com,2025-07-24 14:31:22
 78 45 90 AB,Multimeter,Fluke 117,EMSYS0003,Yedukondalu J,40041351,6304829730,yedu@example.com,2025-07-24 09:30:00
 62 93 3C 47,Power Supply,Keysight E3631A,EMSYS0004,Lakshmi Thanuja K,40041055,786226742,thanuja@example.com,2025-07-24 09:45:00
 52 92 5A 29,Soldering Station,YIHUA 878D,EMSYS0005,Hema Sai Reddy G,40019162,7981435723,hema2@example.com,2025-07-24 10:00:00
