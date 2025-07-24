@@ -2,79 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Device Details</title>
+    <title>{{ device['DeviceName'] }} - {{ device['ModelName'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        label { display: block; margin-top: 10px; }
-        input { width: 300px; }
+        label { display: block; margin-top: 8px; }
+        input { width: 300px; padding: 5px; }
+        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+        .error { color: red; }
+        .success { color: green; }
     </style>
 </head>
 <body>
-    {% if device %}
-        <h1>{{ device['DeviceName'] }} ({{ device['DeviceID'] }})</h1>
+    <h1>{{ device['DeviceName'] }} - {{ device['ModelName'] }}</h1>
+    <p><strong>Equipment Number:</strong> {{ device['EquipmentNumber'] }}</p>
 
-        <h2>Ownership Details (Fixed)</h2>
-        <ul>
-            <li><strong>Owner:</strong> {{ device['Owner'] }}</li>
-            <li><strong>PS Number:</strong> {{ device['OwnerPS'] }}</li>
-            <li><strong>Phone:</strong> {{ device['OwnerPhone'] }}</li>
-            <li><strong>Email:</strong> {{ device['OwnerEmail'] }}</li>
-        </ul>
-
-        <h2>Current User</h2>
-        <ul>
-            <li><strong>User:</strong> {{ device['CurrentUser'] }}</li>
-            <li><strong>PS Number:</strong> {{ device['CurrentPS'] }}</li>
-            <li><strong>Phone:</strong> {{ device['CurrentPhone'] }}</li>
-            <li><strong>Email:</strong> {{ device['CurrentEmail'] }}</li>
-            <li><strong>Last Updated:</strong> {{ device['LastUpdated'] }}</li>
-        </ul>
-
-        <h3>New User (All Fields Required)</h3>
-        <form method="post">
-            <label>New User Name:
-                <input type="text" name="user" required>
-            </label>
-            <label>PS Number:
-                <input type="number" name="ps" required>
-            </label>
-            <label>Phone:
-                <input type="number" name="phone" required>
-            </label>
-            <label>Email:
-                <input type="email" name="email" required>
-            </label>
-            <button type="submit" name="action" value="transfer">✅ Update New User</button>
-            <button type="submit" name="action" value="reset">🔁 Reset to Owner</button>
-        </form>
-
-        <h3>Last 10 Transfers</h3>
-        {% if history %}
-            <table border="1">
-                <tr>
-                    <th>Previous PS</th>
-                    <th>New PS</th>
-                    <th>Timestamp</th>
-                </tr>
-                {% for row in history %}
-                    <tr>
-                        <td>{{ row['PreviousPS'] }}</td>
-                        <td>{{ row['NewPS'] }}</td>
-                        <td>{{ row['Timestamp'] }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            <p>No transfer history yet.</p>
-        {% endif %}
-
-        {% if message %}
-            <p><strong>{{ message }}</strong></p>
-        {% endif %}
-
-    {% else %}
-        <h1>Device Not Found</h1>
+    {% if message %}
+        <p class="success">{{ message }}</p>
+    {% endif %}
+    {% if error %}
+        <p class="error">{{ error }}</p>
     {% endif %}
 
-    <p><a href="/">⬅ Back to Device List</a></p>
+    <div class="section">
+        <h3>Owner Details (Fixed)</h3>
+        <p><strong>Name:</strong> {{ device['Owner'] }}</p>
+        <p><strong>PS Number:</strong> {{ device['OwnerPS'] }}</p>
+        <p><strong>Phone:</strong> {{ device['OwnerPhone'] }}</p>
+        <p><strong>Email:</strong> {{ device['OwnerEmail'] }}</p>
+    </div>
+
+    <div class="section">
+        <h3>Current User</h3>
+        <p><strong>Name:</strong> {{ device['CurrentUser'] }}</p>
+        <p><strong>PS Number:</strong> {{ device['CurrentPS'] }}</p>
+        <p><strong>Phone:</strong> {{ device['CurrentPhone'] }}</p>
+        <p><strong>Email:</strong> {{ device['CurrentEmail'] }}</p>
+        <p><strong>Last Updated:</strong> {{ device['LastUpdated'] }}</p>
+    </div>
+
+    <div class="section">
+        <h3>New User</h3>
+        <form method="post">
+            <input type="hidden" name="action" value="update">
+            <label for="user">Name:</label>
+            <input type="text" name="user" id="user" required>
+
+            <label for="ps">PS Number (numbers only):</label>
+            <input type="text" name="ps" id="ps" pattern="[0-9]+" required>
+
+            <label for="phone">Phone (numbers only):</label>
+            <input type="text" name="phone" id="phone" pattern="[0-9]+" required>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <br><br>
+            <button type="submit">Update New User</button>
+        </form>
+    </div>
+
+    <div class="section">
+        <h3>Actions</h3>
+        <form method="post">
+            <input type="hidden" name="action" value="reset">
+            <button type="submit">Reset to Owner</button>
+        </form>
+        <form method="post">
+            <input type="hidden" name="action" value="history">
+            <button type="submit">Show Device History</button>
+        </form>
+    </div>
+
+    {% if history %}
+    <div class="section">
+        <h3>Last 10 Ownership Transfers</h3>
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Previous PS</th>
+                    <th>New PS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in history %}
+                <tr>
+                    <td>{{ h['Timestamp'] }}</td>
+                    <td>{{ h['PreviousPS'] }}</td>
+                    <td>{{ h['NewPS'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
 </body>
 </html>
