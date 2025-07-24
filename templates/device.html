@@ -1,46 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Device Details</title>
-</head>
+<head><title>Device Details</title></head>
 <body>
-    {% if device %}
-        <h2>📟 {{ device['DeviceName'] }} - {{ device['ModelName'] }}</h2>
-        <p><strong>Equipment Number:</strong> {{ device['EquipmentNumber'] }}</p>
-        <p><strong>Device ID:</strong> {{ device['DeviceID'] }}</p>
+  {% if not device %}
+    <h3>❌ Device not found</h3>
+  {% else %}
+    <h2>{{ device.DeviceName }} ({{ device.ModelName }})</h2>
+    <p><b>Equipment No:</b> {{ device.EquipmentNumber }}</p>
 
-        <h3>🔒 Ownership Details</h3>
-        <ul>
-            <li><strong>Owner:</strong> {{ device['Owner'] }}</li>
-            <li><strong>PS Number:</strong> {{ device['OwnerPS'] }}</li>
-            <li><strong>Phone:</strong> {{ device['OwnerPhone'] }}</li>
-            <li><strong>Email:</strong> {{ device['OwnerEmail'] }}</li>
-        </ul>
+    <h3>🔐 Owner Details</h3>
+    <ul>
+      <li><b>Name:</b> {{ device.Owner }}</li>
+      <li><b>PS:</b> {{ device.OwnerPS }}</li>
+      <li><b>Phone:</b> {{ device.OwnerPhone }}</li>
+      <li><b>Email:</b> {{ device.OwnerEmail }}</li>
+    </ul>
 
-        <h3>👤 Current User</h3>
-        <ul>
-            <li><strong>Name:</strong> {{ device['CurrentUser'] }}</li>
-            <li><strong>PS Number:</strong> {{ device['CurrentUserPS'] }}</li>
-            <li><strong>Phone:</strong> {{ device['CurrentUserPhone'] }}</li>
-            <li><strong>Email:</strong> {{ device['CurrentUserEmail'] }}</li>
-        </ul>
+    <h3>👤 Current User</h3>
+    <ul>
+      <li><b>Name:</b> {{ device.CurrentUser }}</li>
+      <li><b>PS:</b> {{ device.CurrentUserPS }}</li>
+      <li><b>Phone:</b> {{ device.CurrentUserPhone }}</li>
+      <li><b>Email:</b> {{ device.CurrentUserEmail }}</li>
+      <li><b>Last Updated:</b> {{ device.LastUpdated }}</li>
+    </ul>
 
-        <h3>✍️ Transfer Device</h3>
-        <form method="POST">
-            <input name="user" placeholder="New User Name" required><br>
-            <input name="ps" placeholder="PS Number" required><br>
-            <input name="phone" placeholder="Phone" required><br>
-            <input name="email" placeholder="Email" required><br>
-            <button type="submit">Transfer</button>
-        </form>
+    <form method="POST">
+      <input type="hidden" name="action" value="update">
+      <label>New User:</label> <input name="user"><br>
+      <label>PS No:</label> <input name="ps"><br>
+      <label>Phone:</label> <input name="phone"><br>
+      <label>Email:</label> <input name="email"><br>
+      <button type="submit">📤 Transfer</button>
+    </form>
 
-        {% if message %}
-            <p style="color: green;">{{ message }}</p>
-        {% endif %}
-        <p><strong>Last Updated:</strong> {{ device['LastUpdated'] }}</p>
+    <form method="POST" style="margin-top:1em;">
+      <input type="hidden" name="action" value="reset">
+      <button type="submit">🔄 Reset to Owner</button>
+    </form>
 
-    {% else %}
-        <h2>Device not found ❌</h2>
+    <form method="POST" style="margin-top:1em;">
+      <input type="hidden" name="action" value="history">
+      <button type="submit">📜 Show Last 10 Transfers</button>
+    </form>
+
+    {% if history %}
+      <h3>📚 Last 10 Transfers</h3>
+      <ul>
+        {% for h in history %}
+        <li><b>{{ h.Timestamp }}</b>: {{ h.PrevUser }} ➡️ {{ h.NewUser }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
+
+    {% if message %}
+      <p><b>{{ message }}</b></p>
+    {% endif %}
+  {% endif %}
 </body>
 </html>
