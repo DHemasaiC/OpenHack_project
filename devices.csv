@@ -1,4 +1,4 @@
-DeviceID,DeviceName,ModelName,EquipmentNumber,CurrentUser,PSNumber,Phone,Email,LastUpdated
+Device ID,Device Name,Model Name,Equipment Number,Current User,PS Number,Phone,Email,LastUpdated
 93 13 5D 14,Oscilloscope,Tektronix TBS1102B,EMSYS0001,Gangadhar T,40018743,9515846269,ganga@example.com,2025-07-24 09:00:00
 A2 B4 C3 D1,Function Generator,Siglent SDG1032X,EMSYS0002,Hema Sai Reddy,40019162,7981435723,gayamhemasaireddy@gmail.com,2025-07-24 14:31:22
 78 45 90 AB,Multimeter,Fluke 117,EMSYS0003,Yedukondalu J,40041351,6304829730,yedu@example.com,2025-07-24 09:30:00
