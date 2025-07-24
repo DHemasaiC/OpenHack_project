@@ -1,4 +1,4 @@
-DeviceID,DeviceName,ModelName,EquipmentNumber,Owner,OwnerPS,OwnerPhone,OwnerEmail,CurrentUser,CurrentUserPS,CurrentUserPhone,CurrentUserEmail,LastUpdated
+DeviceID,DeviceName,ModelName,EquipmentNumber,Owner,OwnerPS,OwnerPhone,OwnerEmail,CurrentUser,CurrentPS,CurrentPhone,CurrentEmail,LastUpdated
 93 13 5D 14,Oscilloscope,Tektronix TBS1102B,EMSYS0001,Gangadhar T,40018743,9515846269,Telagareddy.Gangadhar@ltts.com,Gangadhar T,40018743,9515846269,Telagareddy.Gangadhar@ltts.com,2025-07-24 09:00:00
 A2 B4 C3 D1,Function Generator,Siglent SDG1032X,EMSYS0002,Hema Sai Reddy,40019162,7981435723,gayam.reddy@ltts.com,Hema Sai Reddy,40019162,7981435723,gayam.reddy@ltts.com,2025-07-24 14:31:22
 78 45 90 AB,Multimeter,Fluke 117,EMSYS0003,Yedukondalu J,40041351,6304829730,jadda.yedukondalu@ltts.com,Yedukondalu J,40041351,6304829730,jadda.yedukondalu@ltts.com,2025-07-24 09:30:00
