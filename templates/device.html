@@ -25,13 +25,14 @@
         <li><strong>PS Number:</strong> {{ device.CurrentPS }}</li>
         <li><strong>Phone:</strong> {{ device.CurrentPhone }}</li>
         <li><strong>Email:</strong> {{ device.CurrentEmail }}</li>
+        <li><strong>Last Updated:</strong> {{ device.LastUpdated }}</li>
     </ul>
 
     <h2>New User</h2>
     <form method="POST">
         <label>Name: <input type="text" name="user" required></label><br>
-        <label>PS Number: <input type="text" name="ps" pattern="\\d+" required></label><br>
-        <label>Phone: <input type="text" name="phone" pattern="\\d+" required></label><br>
+        <label>PS Number: <input type="text" name="ps" pattern="\d+" title="Only digits allowed" required></label><br>
+        <label>Phone: <input type="text" name="phone" pattern="\d+" title="Only digits allowed" required></label><br>
         <label>Email: <input type="email" name="email" required></label><br>
         <button type="submit">Update New User</button>
     </form>
