@@ -5,67 +5,81 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ device.DeviceName }} ({{ device.DeviceID }})</h1>
+    <div class="container">
+        <h1>{{ device.DeviceName }}</h1>
+        <p class="subheading">Device ID: {{ device.DeviceID }}</p>
+        <p class="subheading">Model: {{ device.ModelName }} | Equipment No: {{ device.EquipmentNumber }}</p>
 
-    {% if message %}
-        <p class="message">{{ message }}</p>
-    {% endif %}
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
 
-    <h2>Owner Details</h2>
-    <ul>
-        <li><strong>Name:</strong> {{ device.Owner }}</li>
-        <li><strong>PS Number:</strong> {{ device.OwnerPS }}</li>
-        <li><strong>Phone:</strong> {{ device.OwnerPhone }}</li>
-        <li><strong>Email:</strong> {{ device.OwnerEmail }}</li>
-    </ul>
+        <div class="section">
+            <h2>Owner Details</h2>
+            <ul>
+                <li><strong>Name:</strong> {{ device.Owner }}</li>
+                <li><strong>PS Number:</strong> {{ device.OwnerPS }}</li>
+                <li><strong>Phone:</strong> {{ device.OwnerPhone }}</li>
+                <li><strong>Email:</strong> {{ device.OwnerEmail }}</li>
+            </ul>
+        </div>
 
-    <h2>Current User</h2>
-    <ul>
-        <li><strong>Name:</strong> {{ device.CurrentUser }}</li>
-        <li><strong>PS Number:</strong> {{ device.CurrentPS }}</li>
-        <li><strong>Phone:</strong> {{ device.CurrentPhone }}</li>
-        <li><strong>Email:</strong> {{ device.CurrentEmail }}</li>
-        <li><strong>Last Updated:</strong> {{ device.LastUpdated }}</li>
-    </ul>
+        <div class="section">
+            <h2>Current User</h2>
+            <ul>
+                <li><strong>Name:</strong> {{ device.CurrentUser }}</li>
+                <li><strong>PS Number:</strong> {{ device.CurrentPS }}</li>
+                <li><strong>Phone:</strong> {{ device.CurrentPhone }}</li>
+                <li><strong>Email:</strong> {{ device.CurrentEmail }}</li>
+                <li><strong>Last Updated:</strong> {{ device.LastUpdated }}</li>
+            </ul>
+        </div>
 
-    <h2>New User</h2>
-    <form method="POST">
-        <label>Name: <input type="text" name="user" required></label><br>
-        <label>PS Number: <input type="text" name="ps" pattern="\d+" title="Only digits allowed" required></label><br>
-        <label>Phone: <input type="text" name="phone" pattern="\d+" title="Only digits allowed" required></label><br>
-        <label>Email: <input type="email" name="email" required></label><br>
-        <button type="submit">Update New User</button>
-    </form>
+        <div class="section">
+            <h2>New User</h2>
+            <form method="POST">
+                <label>Name: <input type="text" name="user" required></label><br>
+                <label>PS Number: <input type="text" name="ps" pattern="\d+" title="Only digits allowed" required></label><br>
+                <label>Phone: <input type="text" name="phone" pattern="\d+" title="Only digits allowed" required></label><br>
+                <label>Email: <input type="email" name="email" required></label><br>
+                <button type="submit" class="btn-primary">Update New User</button>
+            </form>
+        </div>
 
-    <form method="POST">
-        <input type="hidden" name="reset" value="1">
-        <button type="submit">Reset to Owner</button>
-    </form>
+        <div class="section">
+            <form method="POST">
+                <input type="hidden" name="reset" value="1">
+                <button type="submit" class="btn-secondary">Reset to Owner</button>
+            </form>
+        </div>
 
-    {% if history %}
-    <h2>Last 10 Ownership Transfers</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Time</th>
-                <th>Old User</th>
-                <th>Old PS</th>
-                <th>New User</th>
-                <th>New PS</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in history %}
-            <tr>
-                <td>{{ entry.Timestamp }}</td>
-                <td>{{ entry.OldUser }}</td>
-                <td>{{ entry.OldPS }}</td>
-                <td>{{ entry.NewUser }}</td>
-                <td>{{ entry.NewPS }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
+        {% if history %}
+        <div class="section">
+            <h2>Last 10 Ownership Transfers</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Old User</th>
+                        <th>Old PS</th>
+                        <th>New User</th>
+                        <th>New PS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in history %}
+                    <tr>
+                        <td>{{ entry.Timestamp }}</td>
+                        <td>{{ entry.OldUser }}</td>
+                        <td>{{ entry.OldPS }}</td>
+                        <td>{{ entry.NewUser }}</td>
+                        <td>{{ entry.NewPS }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>

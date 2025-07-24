@@ -1,34 +1,105 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 30px;
-    background: #f9f9f9;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f7fa;
     color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
-h1, h2 {
-    color: #004080;
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1a73e8;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.subheading {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    font-size: 20px;
+    color: #1a73e8;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="email"] {
+    padding: 8px;
+    width: 95%;
+    margin: 6px 0 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #1a73e8;
+    color: white;
+    margin-top: 10px;
+}
+
+.btn-secondary {
+    background-color: #f44336;
+    color: white;
+    margin-top: 10px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.message {
+    background-color: #e7f4e4;
+    border-left: 4px solid #4caf50;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 15px 0;
-    background: white;
-}
-
-table, th, td {
-    border: 1px solid #ccc;
+    font-size: 14px;
 }
 
 th, td {
-    padding: 10px;
+    border: 1px solid #ccc;
+    padding: 8px;
     text-align: left;
 }
 
-.message {
-    background: #dff0d8;
-    color: #3c763d;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #d6e9c6;
+th {
+    background-color: #e9ecef;
 }
