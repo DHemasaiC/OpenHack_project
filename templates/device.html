@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Device {{ device.DeviceID }}</title></head>
+<body>
+    <h2>Device Information</h2>
+
+    <ul>
+        <li><strong>Device ID:</strong> {{ device.DeviceID }}</li>
+        <li><strong>Device Name:</strong> {{ device.DeviceName }}</li>
+        <li><strong>Model:</strong> {{ device.ModelName }}</li>
+        <li><strong>Equipment Number:</strong> {{ device.EquipmentNumber }}</li>
+        <li><strong>Current User:</strong> {{ device.CurrentUser }}</li>
+        <li><strong>PS Number:</strong> {{ device.PSNumber }}</li>
+        <li><strong>Phone:</strong> {{ device.Phone }}</li>
+        <li><strong>Email:</strong> {{ device.Email }}</li>
+        <li><strong>Last Updated:</strong> {{ device.LastUpdated }}</li>
+    </ul>
+
+    <h3>Transfer Ownership</h3>
+
+    {% if message %}
+        <p style="color: green; font-weight: bold;">{{ message }}</p>
+    {% endif %}
+
+    <form method="post">
+        <input type="text" name="user" placeholder="New User Name" required><br>
+        <input type="text" name="ps" placeholder="PS Number" required><br>
+        <input type="text" name="phone" placeholder="Phone" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
