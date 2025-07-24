@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head><title>Device {{ device.DeviceID }}</title></head>
+<head>
+    <title>Device Details</title>
+</head>
 <body>
-    <h2>Device Information</h2>
+    {% if device %}
+        <h2>📟 {{ device['DeviceName'] }} - {{ device['ModelName'] }}</h2>
+        <p><strong>Equipment Number:</strong> {{ device['EquipmentNumber'] }}</p>
+        <p><strong>Device ID:</strong> {{ device['DeviceID'] }}</p>
 
-    <ul>
-        <li><strong>Device ID:</strong> {{ device.DeviceID }}</li>
-        <li><strong>Device Name:</strong> {{ device.DeviceName }}</li>
-        <li><strong>Model:</strong> {{ device.ModelName }}</li>
-        <li><strong>Equipment Number:</strong> {{ device.EquipmentNumber }}</li>
-        <li><strong>Current User:</strong> {{ device.CurrentUser }}</li>
-        <li><strong>PS Number:</strong> {{ device.PSNumber }}</li>
-        <li><strong>Phone:</strong> {{ device.Phone }}</li>
-        <li><strong>Email:</strong> {{ device.Email }}</li>
-        <li><strong>Last Updated:</strong> {{ device.LastUpdated }}</li>
-    </ul>
+        <h3>🔒 Ownership Details</h3>
+        <ul>
+            <li><strong>Owner:</strong> {{ device['Owner'] }}</li>
+            <li><strong>PS Number:</strong> {{ device['OwnerPS'] }}</li>
+            <li><strong>Phone:</strong> {{ device['OwnerPhone'] }}</li>
+            <li><strong>Email:</strong> {{ device['OwnerEmail'] }}</li>
+        </ul>
 
-    <h3>Transfer Ownership</h3>
+        <h3>👤 Current User</h3>
+        <ul>
+            <li><strong>Name:</strong> {{ device['CurrentUser'] }}</li>
+            <li><strong>PS Number:</strong> {{ device['CurrentUserPS'] }}</li>
+            <li><strong>Phone:</strong> {{ device['CurrentUserPhone'] }}</li>
+            <li><strong>Email:</strong> {{ device['CurrentUserEmail'] }}</li>
+        </ul>
 
-    {% if message %}
-        <p style="color: green; font-weight: bold;">{{ message }}</p>
+        <h3>✍️ Transfer Device</h3>
+        <form method="POST">
+            <input name="user" placeholder="New User Name" required><br>
+            <input name="ps" placeholder="PS Number" required><br>
+            <input name="phone" placeholder="Phone" required><br>
+            <input name="email" placeholder="Email" required><br>
+            <button type="submit">Transfer</button>
+        </form>
+
+        {% if message %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+        <p><strong>Last Updated:</strong> {{ device['LastUpdated'] }}</p>
+
+    {% else %}
+        <h2>Device not found ❌</h2>
     {% endif %}
-
-    <form method="post">
-        <input type="text" name="user" placeholder="New User Name" required><br>
-        <input type="text" name="ps" placeholder="PS Number" required><br>
-        <input type="text" name="phone" placeholder="Phone" required><br>
-        <input type="email" name="email" placeholder="Email" required><br>
-        <button type="submit">Update</button>
-    </form>
 </body>
 </html>

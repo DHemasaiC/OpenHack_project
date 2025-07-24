@@ -6,24 +6,27 @@ import shutil
 
 app = Flask(__name__)
 
-# 🔁 Use /tmp path for write access on Render
 LOCAL_CSV = 'devices.csv'
 CSV_FILE = '/tmp/devices.csv'
 
-# 🧠 Copy original CSV to /tmp only if it doesn’t exist
+# Only copy original once
 if not os.path.exists(CSV_FILE):
     shutil.copyfile(LOCAL_CSV, CSV_FILE)
 
-# 🔄 Load devices into memory
 def load_devices():
     with open(CSV_FILE, mode='r', newline='') as file:
         reader = csv.DictReader(file)
         return list(reader)
 
-# 💾 Save updated devices
 def write_devices(devices):
+    fieldnames = [
+        'DeviceID', 'DeviceName', 'ModelName', 'EquipmentNumber',
+        'Owner', 'OwnerPS', 'OwnerPhone', 'OwnerEmail',
+        'CurrentUser', 'CurrentUserPS', 'CurrentUserPhone', 'CurrentUserEmail',
+        'LastUpdated'
+    ]
     with open(CSV_FILE, mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=devices[0].keys())
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(devices)
 
@@ -41,13 +44,13 @@ def device_page(device_id):
 
     message = None
     if request.method == 'POST':
-        device['Current User'] = request.form['user']
-        device['PS Number'] = request.form['ps']
-        device['Phone'] = request.form['phone']
-        device['Email'] = request.form['email']
+        device['CurrentUser'] = request.form['user']
+        device['CurrentUserPS'] = request.form['ps']
+        device['CurrentUserPhone'] = request.form['phone']
+        device['CurrentUserEmail'] = request.form['email']
         device['LastUpdated'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         write_devices(devices)
-        message = f"✅ Ownership transferred to {device['Current User']}"
+        message = f"✅ Ownership transferred to {device['CurrentUser']}"
 
     return render_template('device.html', device=device, message=message)
 
