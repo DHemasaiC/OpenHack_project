@@ -1,1 +1,1 @@
-Timestamp,DeviceID,PrevUser,PrevPS,PrevPhone,PrevEmail,NewUser,NewPS,NewPhone,NewEmail
+DeviceID,Timestamp,OldUser,OldPS,NewUser,NewPS

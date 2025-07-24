@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Device Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Device Dashboard</h1>
-    <ul>
-        {% for device in devices %}
-        <li>
-            <a href="{{ url_for('device_page', device_id=device['DeviceID']) }}">
-                {{ device['DeviceName'] }} - {{ device['ModelName'] }} ({{ device['DeviceID'] }})
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Device ID</th>
+                <th>Device Name</th>
+                <th>Model</th>
+                <th>Equipment Number</th>
+                <th>Current User</th>
+                <th>Last Updated</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for device in devices %}
+            <tr>
+                <td>{{ device.DeviceID }}</td>
+                <td>{{ device.DeviceName }}</td>
+                <td>{{ device.ModelName }}</td>
+                <td>{{ device.EquipmentNumber }}</td>
+                <td>{{ device.CurrentUser }}</td>
+                <td>{{ device.LastUpdated }}</td>
+                <td><a href="/device/{{ device.DeviceID }}">Open</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
