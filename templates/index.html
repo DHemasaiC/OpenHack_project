@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head><title>Device QR Access</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Device List</title>
+</head>
 <body>
-  <h2>Scan QR code on device to manage ownership</h2>
+    <h1>Available Devices</h1>
+    <ul>
+        {% for device in devices %}
+            <li><a href="/device/{{ device['DeviceID'] }}">{{ device['DeviceName'] }} - {{ device['DeviceID'] }}</a></li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
