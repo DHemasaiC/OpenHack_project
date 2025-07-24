@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import csv
 import os
 import shutil
@@ -48,7 +49,7 @@ def device_page(device_id):
         device['CurrentUserPS'] = request.form['ps']
         device['CurrentUserPhone'] = request.form['phone']
         device['CurrentUserEmail'] = request.form['email']
-        device['LastUpdated'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        device['LastUpdated'] = datetime.now(ZoneInfo("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
         write_devices(devices)
         message = f"✅ Ownership transferred to {device['CurrentUser']}"
 
