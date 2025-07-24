@@ -71,7 +71,7 @@ def device_page(device_id):
             }
 
             device['CurrentUser'] = request.form['user']
-            ddevice['CurrentUserPS'] = request.form['ps']
+            device['CurrentUserPS'] = request.form['ps']
             device['CurrentUserPhone'] = request.form['phone']
             device['CurrentUserEmail'] = request.form['email']
             device['LastUpdated'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
